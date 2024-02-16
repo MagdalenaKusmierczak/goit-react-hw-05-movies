@@ -1,5 +1,10 @@
 import { Routes, Route, NavLink } from 'react-router-dom';
 
+import Home from 'pages/Home/Home';
+import Movies from 'pages/Movies/Movies';
+import MovieDetails from 'pages/MovieDetails/MovieDetails';
+
+
 export const App = () => {
   return (
     <div>
@@ -14,7 +19,7 @@ export const App = () => {
           <Route path="cast" element={<Cast />}></Route>
           <Route path="reviews" element={<Reviews />}></Route>
         </Route>
-        <Route path="*" element={<Home />} />{' '}
+        <Route path="*" element={<Home />} />
       </Routes>
     </div>
   );
