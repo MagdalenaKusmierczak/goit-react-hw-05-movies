@@ -1,3 +1,5 @@
+import { optionSearch,getData } from 'Service/API/Api';
+
 import {
   Main,
   Searchbar,
@@ -11,7 +13,7 @@ import {
 const Movies = () => {
   return (
     <Main>
-      <Searchbar>
+      <Searchbar onSubmit=(()=>getData(optionSearch))>
         <Input></Input>
         <SubmitButton>Search</SubmitButton>
       </Searchbar>
