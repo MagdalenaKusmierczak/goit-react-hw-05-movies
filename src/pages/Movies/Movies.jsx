@@ -1,4 +1,4 @@
-import { optionSearch,getData } from 'Service/API/Api';
+import { optionSearch, getData } from 'Service/API/Api';
 
 import {
   Main,
@@ -11,11 +11,30 @@ import {
 } from './Movies.styled';
 
 const Movies = () => {
+  const [search, setSearch] = useState('');
+    const handleInput = evt => {
+      setSearch(evt.target.value);
+  };
+    const handleSubmit = evt => {
+      evt.preventDefault();
+      const trimInput = evt.target.elements.query.value.trim();
+      onSubmit(trimInput);
+      evt.target.reset();
+    };
   return (
     <Main>
-      <Searchbar onSubmit=(()=>getData(optionSearch))>
-        <Input></Input>
-        <SubmitButton>Search</SubmitButton>
+      <Searchbar onSubmit={handleSubmit}>
+        <Input
+          type="text"
+          autoComplete="off"
+          autoFocus
+          name="query"
+          id="search"
+          placeholder="Search images and photos"
+          value={search}
+          onChange={handleInput}
+        />
+        <SubmitButton type="submit">Search</SubmitButton>
       </Searchbar>
       <MovieList>
         <MovieItem>
