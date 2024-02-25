@@ -3,6 +3,7 @@ import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { getMovieDetails } from 'Service/API/Api';
 import Loader from 'Service/Loader/Loader';
 
+import big from 'Service/Placeholders/big.jpg';
 import {
   BackButton,
   Main,
@@ -51,7 +52,11 @@ const MovieDetails = () => {
         </Link>
         <MovieWrapper>
           <Image
-            src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
+            src={
+              details.poster_path
+                ? `https://image.tmdb.org/t/p/w500${details.poster_path}`
+                : `${big}`
+            }
             alt={details.title}
           />
           <DescriptionWrapper>

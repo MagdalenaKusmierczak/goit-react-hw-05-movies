@@ -6,6 +6,7 @@ import {
   MemberImage,
   MemberCharacter,
 } from './CastList.styled';
+import small from 'Service/Placeholders/small.jpg';
 
 const CastList = ({ cast }) => {
   return (
@@ -13,7 +14,11 @@ const CastList = ({ cast }) => {
       {cast.map(member => (
         <CastMember key={member.id}>
           <MemberImage
-            src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${member.profile_path}`}
+            src={
+              member.profile_path
+                ? `https://image.tmdb.org/t/p/w300_and_h450_bestv2${member.profile_path}`
+                : `${small}`
+            }
             alt={member.original_name}
           />
           <MemberName>{member.name}</MemberName>
@@ -28,7 +33,7 @@ CastList.propTypes = {
   cast: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      profile_path: PropTypes.string.isRequired,
+      profile_path: PropTypes.string,
       original_name: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       character: PropTypes.string.isRequired,
