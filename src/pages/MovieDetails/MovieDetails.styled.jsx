@@ -14,3 +14,4 @@ export const ListItem = styled.li``;
 export const StyledLink = styled(Link)``;
 export const Image = styled.img``;
 export const BackButton = styled.button``;
+export const Genre = styled.span``;
