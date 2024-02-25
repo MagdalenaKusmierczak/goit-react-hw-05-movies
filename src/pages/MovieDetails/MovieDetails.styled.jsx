@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Main = styled.main``;
 export const Section = styled.section``;
@@ -10,6 +11,6 @@ export const Genres = styled.h4``;
 export const Paragraph = styled.p``;
 export const List = styled.ul``;
 export const ListItem = styled.li``;
-export const StyledLink = styled.Link``;
+export const StyledLink = styled(Link)``;
 export const Image = styled.img``;
 export const BackButton = styled.button``;
