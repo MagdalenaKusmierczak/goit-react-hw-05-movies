@@ -1,46 +1,41 @@
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { getSearchMovies } from 'Service/API/Api';
+import SearchBar from 'components/SearchBar/SearchBar';
+import SearchedMovies from 'components/SearchedMovies/SearchedMovies';
+import { Main, Warning } from './Movies.styled';
 
-import {
-  Main,
-  Searchbar,
-  Input,
-  SubmitButton,
-  MovieList,
-  MovieItem,
-  MovieLink,
-} from './Movies.styled';
 
 const Movies = () => {
-  const [search, setSearch] = useState('');
-  const handleInput = evt => {
-    setSearch(evt.target.value);
+  const [resultMovies, setResultMovies] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const movieName = searchParams.get('query') || '';
+
+  const searchQuery = query => {
+    const nextParams = query !== '' && { query };
+    setSearchParams(nextParams);
   };
-  const handleSubmit = evt => {
-    evt.preventDefault();
-    const trimInput = evt.target.elements.query.value.trim();
-    onSubmit(trimInput);
-    evt.target.reset();
-  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const movies = await getSearchMovies(movieName);
+        setResultMovies(movies);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [movieName]);
+
   return (
     <Main>
-      <Searchbar onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          autoComplete="off"
-          autoFocus
-          name="query"
-          id="search"
-          placeholder="Search images and photos"
-          value={search}
-          onChange={handleInput}
-        />
-        <SubmitButton type="submit">Search</SubmitButton>
-      </Searchbar>
-      <MovieList>
-        <MovieItem>
-          <MovieLink></MovieLink>
-        </MovieItem>
-      </MovieList>
+      <SearchBar value={movieName} onChange={searchQuery} />
+      {resultMovies.length === 0 && movieName ? (
+        <Warning>Nothing was found, check your typing</Warning>
+      ) : (
+        <SearchedMovies movies={resultMovies} />
+      )}
     </Main>
   );
 };
