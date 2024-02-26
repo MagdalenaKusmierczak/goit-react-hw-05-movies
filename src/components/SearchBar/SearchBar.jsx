@@ -17,8 +17,8 @@ const SearchBar = ({ search, onChange }) => {
           value={search}
           onChange={evt => onChange(evt.target.value)}
         />
+        <SubmitButton type="submit">Search</SubmitButton>
       </Searchbar>
-      <SubmitButton type="submit">Search</SubmitButton>
     </>
   );
 };

@@ -43,12 +43,12 @@ const MovieDetails = () => {
   if (!details) {
     return <Loader />;
   }
-
+  const realaseYear = details.release_date.slice(0, 4);
   return (
     <>
       <Main>
         <Link to={goBackLocation.current}>
-          <BackButton>Go back</BackButton>
+          <BackButton> ← Go back</BackButton>
         </Link>
         <MovieWrapper>
           <Image
@@ -60,7 +60,12 @@ const MovieDetails = () => {
             alt={details.title}
           />
           <DescriptionWrapper>
-            <Title>{details.title}</Title>
+            <Title>
+              {details.title}
+              {`(`}
+              {realaseYear}
+              {`)`}
+            </Title>
             <Paragraph>User Score: {details.vote_average}</Paragraph>
             <Overview>Overview </Overview>
             <Paragraph>{details.overview}</Paragraph>
@@ -83,6 +88,8 @@ const MovieDetails = () => {
             <StyledLink to="reviews">Reviews</StyledLink>
           </ListItem>
         </List>
+      </Section>
+      <Section>
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>

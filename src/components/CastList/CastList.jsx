@@ -5,6 +5,7 @@ import {
   MemberName,
   MemberImage,
   MemberCharacter,
+  MemberWrapper,
 } from './CastList.styled';
 import small from 'Service/Placeholders/small.jpg';
 
@@ -12,7 +13,7 @@ const CastList = ({ cast }) => {
   return (
     <List>
       {cast.map(member => (
-        <CastMember key={member.id}>
+        <CastMember key={member.id}><MemberWrapper>
           <MemberImage
             src={
               member.profile_path
@@ -22,7 +23,7 @@ const CastList = ({ cast }) => {
             alt={member.original_name}
           />
           <MemberName>{member.name}</MemberName>
-          <MemberCharacter>Character: {member.character}</MemberCharacter>
+          <MemberCharacter>Character: {member.character}</MemberCharacter></MemberWrapper>
         </CastMember>
       ))}
     </List>
